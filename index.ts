@@ -123,3 +123,62 @@ const bucket : Rectangle =
 
 let num = calculate_rectangle(bucket)
 console.log('total_calculation :'+ num)
+
+
+
+function returning_array1<Mukund>(arr:Mukund[]):Mukund
+{
+    return arr[0];
+}
+
+let ans = returning_array1(["mukund", "jha"]);
+let ans1  = returning_array1 ([2,3,6,7]);
+console.log(ans.toUpperCase())
+
+//array desctructuring
+
+const arr = ["mukund jha",23,157777];
+
+const  [full_name,numi="amit", age ,salary] = arr;
+console.log(full_name,salary,age,salary,numi)
+
+const students = {
+    name4 : 'mukund jha',
+    age3 : 23,
+    occupation:"students"
+}
+
+//object destructuring 
+const {name4 ,age3,occupation} = students;
+console.log(name4,age3,occupation)
+
+//
+
+const numbers : number[] = [12,4,5,6,6];
+const data = numbers.filter(item => item * 2 === 8)
+console.log(data)
+
+const user_data : string[] = ["Mukund jha",'amit yadav','jitesh'];
+const result = user_data.filter(item=>item ==="Mukund jha")
+console.log(result)
+
+
+const fruits :string[] = ['Apple','banana','lichi'];
+const result2 = fruits.filter((item:string)=>
+  item.toLocaleLowerCase().includes('a'))
+
+console.log(result2)
+
+interface Item {
+    name: string;
+    price: number;
+}
+
+let items: Item[] = [
+    { name: 'Apple', price: 0.65 },
+    { name: 'Orange', price: 0.50 },
+];
+
+let prices: number[] = items.map((item) => item.price);
+
+console.log(prices)
