@@ -1,146 +1,125 @@
-const hero : string ="Mukund jha";
-console.log(hero);
+type greetArg = number | boolean | string;
 
-let greet = (firstname:string) =>
-{
-    console.log(`hello ${firstname}`)
-}
-greet('Mukund jha')
+function greet(id :greetArg):void  {
+console.log('id :', id)
+} //union types 
 
-let sum = (num1:number ,num2:number):number =>
-{
-    return num1 + num2
-}
-
-console.log(sum(3,4))
-
-function voting_elligible (age:number)
-{
-    if(age>=18)
-    {console.log('elligible to vote')}
-    else{
-        {console.log('not elligible to vote!')}
-    }
-}
-voting_elligible(12);
-
-function runafter1sec(fn:()=>void)
-{
-    setTimeout(fn,1000)
-}
-
-runafter1sec(function()
-{
-    console.log('Mukund jha')
-})
-
-interface User {
-  firstname : string,
-  lastname : string,
-  age: number,
-  email?:string,
-}
-
-const age_checking  = (user:User):boolean=>
-{
-   if(user.age >= 18 )
-   {
-    return true;
-   }
-   else{return false}
-}
-
-let greeting = (user:User):void =>
-{
-   if(user.firstname)
-   {
-     console.log(`congratulation : ${user.firstname}`)
-   }
-   
-}
-
-let userobj : User={
-    firstname: "Mukund jha",
-    lastname : "jha",
-    age : 20,
-    email:'jhamukund986@gmail.com'
-}
-
-if(age_checking(userobj))
-{
-    greeting(userobj);
-}
-else{
-    console.log('not elligibke to Vote ')
-}
-
-interface person {
-    name : string,
-    age : number,
-    greet(phrase :string) : void
-};
+greet (1)
+greet(true);
+greet("2");
 
 
-class Manger implements person{
+type Employee = {
     name : string;
-    age : number;
+    startDate : Date;
+}
+
+interface Manager {
+  name : string;
+  department : string;
+}
 
 
-    constructor(name : string,age: number)
+//type can do let & and | but interface can't do this 
+//interface can implement by class type cant implement by class.
+
+type Techlead = Employee | Manager;
+
+type techlead= {
+    name : string;
+    department : string;
+    startDate:Date;
+
+}
+
+const t : techlead= {
+name : "mukund jha",
+department : "Hr",
+startDate: new Date(),
+}
+
+
+type max_number = number[];
+
+function max_array ( arr:max_number):number
+{
+ let max = 0;
+  for (let i = 0; i<arr.length ; i++)
+  {
+    if(arr[i]>max)
     {
-       this.name = name;
-       this.age = age;
+      max = arr[i];
     }
+  }
+  return max;
+}
 
-    greet(phrase:string):void{
-        console.log(`${phrase},My name is ${this.name} and my age is ${this.age}`)
+
+console.log(max_array([2,8,9,65]));
+
+interface shape {
+    name : string,
+    color : string,
+    area:()=>number
+}
+
+
+function calculate_area(shape :shape ):number
+{
+   console.log('calculating area of the shape :' +  shape.name)
+   return shape.area();
+}
+
+
+const Circle :shape  ={
+    name : 'circle',
+    color : 'red',
+    area (){
+     return Math.PI * 2* 2
+    }
+ }
+
+
+console.log(calculate_area(Circle));
+
+enum status_code {
+    ok  = 'all ok',
+    some_wrong = 'something went wrong'
+}
+
+
+let bad_request = (status :status_code):void =>
+{
+    if(status === status_code.ok)
+    {
+        console.log('all is ok')
     }
 }
-
-const Manager = new Manger('mukund jha',18)
-console.log(typeof(Manager))
+bad_request(status_code.ok)
 
 
-Manager.greet("hello");
-
-
-
-interface Students {
-    Fullname : string,
-    Lastname : string,
-    class: string,
-    Roll_no : number,
-
-    student_info(phrase:string):void
+interface Rectangle {
+    length : number,
+    breadth : number,
+    height:number,
+    calculate_length : ()=>number
 }
 
-interface Students {
-    Fullname: string;
-    Lastname: string;
-    className: string;
-    Roll_no: number;
-
-    student_info(phrase: string): void;
+const calculate_rectangle = (rect:Rectangle):number=>
+{
+    return rect.calculate_length()
 }
 
-// class School implements Students {
-//     Fullname: string;
-//     Lastname: string;
-//     className: string;  
-//     Roll_no: number;
 
-//     constructor(Fullname: string, Lastname: string, className: string, Roll_no: number) {
-//         this.Fullname = Fullname;
-//         this.Lastname = Lastname;
-//         this.className = className;
-//         this.Roll_no = Roll_no;
-//     }
+const bucket : Rectangle =
+{
+    length : 10,
+    breadth : 20,
+    height:7,
+    calculate_length() {
+     return this.length * this.breadth * this.height
+    },
+}
 
-//     student_info(phrase: string): void {
-//         console.log(`${phrase}: ${this.Fullname} ${this.Lastname}, Class: ${this.className}, Roll No: ${this.Roll_no}`);
-//     }
-// }
-
-// const student = new School("Mukund", "Jha", "10th Grade", 24);
-// student.student_info("Student Info");
-
+let num = calculate_rectangle(bucket)
+console.log('total_calculation :'+ num)
